@@ -1,1 +1,22 @@
-
+{
+  "schemaVersion": 1,
+  "id": "lumenterrain",
+  "version": "${version}",
+  "name": "Lumen Terrain Engine",
+  "description": "Next-generation terrain generation optimization engine for Minecraft.",
+  "authors": [
+    "Astryon"
+  ],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.astryon.lte.LumenTerrainEngine"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~26.2",
+    "java": ">=21"
+  }
+}
