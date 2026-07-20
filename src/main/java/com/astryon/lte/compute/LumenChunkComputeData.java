@@ -1,0 +1,177 @@
+package com.astryon.lte.compute;
+
+import com.astryon.lte.chunk.LTEChunkData;
+import com.astryon.lte.terrain.TerrainProfile;
+
+
+public class LumenChunkComputeData {
+
+
+    public final int chunkX;
+    public final int chunkZ;
+
+
+    /*
+     * Original Minecraft terrain height data.
+     */
+    public final int[] heightmap;
+
+
+    /*
+     * CPU generated data.
+     * These will later become GPU buffers.
+     */
+    public final double[] slopeMap;
+
+    public final double[] terrainMask;
+
+
+
+    /*
+     * Statistics from TerrainAnalyzer.
+     */
+    public double averageHeight;
+    public double variation;
+    public double roughness;
+    public double slope;
+    public double complexity;
+
+
+    public String terrainType;
+
+
+    /*
+     * Pipeline states.
+     */
+    public boolean cpuProcessed;
+
+    public boolean gpuProcessed;
+
+
+
+    public LumenChunkComputeData(
+            LTEChunkData data
+    ) {
+
+        this.chunkX = data.x;
+        this.chunkZ = data.z;
+
+
+        this.heightmap =
+                data.heightmap;
+
+
+        /*
+         * 16x16 chunk columns.
+         */
+        this.slopeMap =
+                new double[256];
+
+
+        this.terrainMask =
+                new double[256];
+
+
+        this.cpuProcessed = false;
+
+        this.gpuProcessed = false;
+
+    }
+
+
+
+    public void applyProfile(
+            TerrainProfile profile
+    ) {
+
+        this.averageHeight =
+                profile.getAverageHeight();
+
+
+        this.variation =
+                profile.getVariation();
+
+
+        this.roughness =
+                profile.getRoughness();
+
+
+        this.slope =
+                profile.getSlope();
+
+
+        this.complexity =
+                profile.getComplexity();
+
+
+        this.terrainType =
+                profile.getType();
+
+    }
+
+
+
+    public void markCPUComplete() {
+
+        cpuProcessed = true;
+
+    }
+
+
+
+    public void markGPUComplete() {
+
+        gpuProcessed = true;
+
+    }
+
+
+
+    public void printDebug() {
+
+
+        System.out.println(
+            "[LUMEN COMPUTE BUFFER]"
+        );
+
+
+        System.out.println(
+            "Chunk: "
+            + chunkX
+            + ", "
+            + chunkZ
+        );
+
+
+        System.out.println(
+            "Average Height: "
+            + averageHeight
+        );
+
+
+        System.out.println(
+            "Variation: "
+            + variation
+        );
+
+
+        System.out.println(
+            "Terrain Type: "
+            + terrainType
+        );
+
+
+        System.out.println(
+            "CPU Ready: "
+            + cpuProcessed
+        );
+
+
+        System.out.println(
+            "GPU Ready: "
+            + gpuProcessed
+        );
+
+    }
+
+}
