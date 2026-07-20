@@ -3,6 +3,7 @@ package com.astryon.lte.chunk;
 import com.astryon.lte.terrain.TerrainProcessor;
 import com.astryon.lte.core.LTEStats;
 import com.astryon.lte.compute.LumenChunkComputeData;
+import com.astryon.lte.gpu.LTENative;
 
 public class ChunkProcessor {
 
@@ -46,20 +47,35 @@ public class ChunkProcessor {
 	TerrainProcessor.prepare(computeData);
 
 
-            // GPU PROCESSING STAGE
+	// GPU PROCESSING STAGE
 
-            task.state = ChunkState.PROCESSING_GPU;
-
-
-            System.out.println(
-                "[LTE] GPU processing started: "
-                + task.x + ", " + task.z
-            );
+	task.state = ChunkState.PROCESSING_GPU;
 
 
-            // GPU processing will be connected here in 2.0.0
-            task.data.gpuProcessed = true;
+	System.out.println(
+	    "[LTE] GPU processing started: "
+	    + task.x + ", " + task.z
+	);
 
+
+	try {
+
+	    LTENative.gpuProcessChunk(
+	        task.x,
+	        task.z
+	    );
+
+	} catch (Throwable e) {
+
+	    System.out.println(
+	        "[LTE] GPU processing failed: "
+	        + e.getMessage()
+	    );
+
+	}
+
+
+	task.data.gpuProcessed = true;
 
 
             // COMPLETE

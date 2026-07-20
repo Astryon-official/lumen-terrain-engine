@@ -1,13 +1,15 @@
-public class VulkanManager {
+package com.astryon.lte.gpu;
 
-    public boolean initialize();
+public interface VulkanManager {
 
-    public void shutdown();
+    boolean initialize();
 
-    public boolean isAvailable();
+    void shutdown();
 
-    public String getGpuName();
+    boolean isAvailable();
 
-    public int getComputeQueueCount();
+    String getGpuName();
+
+    int getComputeQueueCount();
 
 }

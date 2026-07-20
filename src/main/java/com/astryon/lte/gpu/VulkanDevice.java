@@ -1,13 +1,21 @@
-String name;
-String vendor;
-String driver;
-UUID uuid;
+package com.astryon.lte.gpu;
 
-long memory;
+import java.util.UUID;
 
-boolean computeSupported;
-boolean graphicsSupported;
+public class VulkanDevice {
 
-int computeQueues;
+    private String name;
+    private String vendor;
+    private String driver;
+    private UUID uuid;
 
-double benchmarkScore;
+    private long memory;
+
+    private boolean computeSupported;
+    private boolean graphicsSupported;
+
+    private int computeQueues;
+
+    private double benchmarkScore;
+
+}

@@ -7,6 +7,12 @@ set(CMAKE_CXX_STANDARD 20)
 
 find_package(Vulkan REQUIRED)
 
+find_package(Java REQUIRED)
+find_package(JNI REQUIRED)
+
+include_directories(
+    ${JNI_INCLUDE_DIRS}
+)
 
 add_library(LumenTerrainEngine SHARED
 
@@ -16,6 +22,7 @@ add_library(LumenTerrainEngine SHARED
     src/VulkanDetector.cpp
     src/BenchmarkManager.cpp
     src/VulkanBenchmark.cpp
+    src/LTENative.cpp
 
 )
 

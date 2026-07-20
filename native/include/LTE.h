@@ -1,6 +1,5 @@
 #pragma once
 
-
 namespace LTE
 {
 
@@ -11,5 +10,10 @@ void Shutdown();
 bool IsInitialized();
 
 const char* GetVersion();
+
+void ProcessChunk(
+    int x,
+    int z
+);
 
 }
